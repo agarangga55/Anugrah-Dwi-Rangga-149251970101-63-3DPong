@@ -41,7 +41,7 @@ public class BallSpawner : MonoBehaviour
 
     private void spawnBall()
     {
-        int spawn = Random.RandomRange(0, spawnPoints.Length);
+        int spawn = Random.Range(0, spawnPoints.Length);
         GameObject generateBall = Instantiate(ball, spawnPoints[spawn].transform.position, Quaternion.identity);
         generateBall.GetComponent<BallController>().BallLaunch(spawn);
         ballList.Add(generateBall);
