@@ -8,6 +8,8 @@ public class PaddleController : MonoBehaviour
 
     public KeyCode leftKey;
     public KeyCode rightKey;
+    public KeyCode fwdKey;
+    public KeyCode bckKey;
 
     public Rigidbody rig;
     // Start is called before the first frame update
@@ -31,6 +33,14 @@ public class PaddleController : MonoBehaviour
         if (Input.GetKey(rightKey))
         {
             return Vector3.right * speed;
+        }
+        if (Input.GetKey(fwdKey))
+        {
+            return Vector3.forward * speed;
+        }
+        if (Input.GetKey(bckKey))
+        {
+            return Vector3.back * speed;
         }
         return Vector3.zero;
     }
