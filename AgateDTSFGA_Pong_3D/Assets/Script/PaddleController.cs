@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PaddleController : MonoBehaviour
 {
+    public GoalController goal;
+
     public int speed;
+    public int score;
 
     public KeyCode leftKey;
     public KeyCode rightKey;
@@ -12,16 +15,25 @@ public class PaddleController : MonoBehaviour
     public KeyCode bckKey;
 
     public Rigidbody rig;
+
+    public bool isLost;
     // Start is called before the first frame update
     void Start()
     {
         rig = GetComponent<Rigidbody>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         MovePaddle(GetInput());
+        if (score == 1)
+        {
+            isLost = true;
+            goal.GetComponent<CapsuleCollider>().isTrigger = false;
+            this.gameObject.SetActive(false);
+        }
     }
 
     private Vector3 GetInput()
@@ -47,7 +59,11 @@ public class PaddleController : MonoBehaviour
     
     private void MovePaddle(Vector3 movement)
     {
-        Debug.Log("test" + movement);
         rig.velocity = movement;
+    }
+
+    public void AddScore()
+    {
+        score += 1;
     }
 }
