@@ -6,6 +6,8 @@ public class BallController : MonoBehaviour
 {
     public Rigidbody rig;
     public BallSpawner spawnerManager;
+    public float minimumSpeed;
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,10 @@ public class BallController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (rig.velocity.magnitude < minimumSpeed)
+        {
+            rig.velocity = rig.velocity.normalized * minimumSpeed;
+        }
     }
 
     public void BallLaunch(int indexPosition)
@@ -28,16 +33,16 @@ public class BallController : MonoBehaviour
         switch (indexPosition)
         {
             case 0:
-                rig.velocity = new Vector3(randomX, 0, randomZ);
+                rig.velocity = new Vector3(randomX, 0, randomZ) * speed;
                 break;
             case 1:
-                rig.velocity = new Vector3(randomMinX, 0, randomZ);
+                rig.velocity = new Vector3(randomMinX, 0, randomZ) * speed;
                 break;
             case 2:
-                rig.velocity = new Vector3(randomMinX, 0, randomMinZ);
+                rig.velocity = new Vector3(randomMinX, 0, randomMinZ) * speed;
                 break;
             case 3:
-                rig.velocity = new Vector3(randomX, 0, randomMinZ);
+                rig.velocity = new Vector3(randomX, 0, randomMinZ)* speed;
                 break;
         }
     }
