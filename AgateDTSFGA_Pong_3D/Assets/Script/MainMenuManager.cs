@@ -32,6 +32,11 @@ public class MainMenuManager : MonoBehaviour
 
     public void OpenTutorial()
     {
+        TutorialMenu.SetActive(true);
         Debug.Log("Tutorial Open");
+    }
+    public void CloseTutorial()
+    {
+        TutorialMenu.SetActive(false);
     }
 }
