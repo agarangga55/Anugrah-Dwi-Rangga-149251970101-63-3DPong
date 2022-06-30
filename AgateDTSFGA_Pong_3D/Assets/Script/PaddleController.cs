@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PaddleController : MonoBehaviour
 {
     public GoalController goal;
+    public GameplayController gameplay;
 
     public int speed;
     public int score;
+    public int loseScore;
+    public int playerNumber;
 
     public KeyCode leftKey;
     public KeyCode rightKey;
@@ -15,6 +20,8 @@ public class PaddleController : MonoBehaviour
     public KeyCode bckKey;
 
     public Rigidbody rig;
+
+    public TextMeshProUGUI scoreText;
 
     public bool isLost;
     // Start is called before the first frame update
@@ -27,12 +34,17 @@ public class PaddleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        scoreText.text = score.ToString();
+
         MovePaddle(GetInput());
-        if (score == 1)
+        if (score == loseScore)
         {
             isLost = true;
             goal.GetComponent<CapsuleCollider>().isTrigger = false;
             this.gameObject.SetActive(false);
+
+            gameplay.playerLose += 1;
+            gameplay.WinCondition();
         }
     }
 
